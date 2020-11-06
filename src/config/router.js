@@ -7,7 +7,6 @@ import { isUserAuthenticated } from '../utils/auth'
 import Layout from '../components/layout/index'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(isUserAuthenticated(), Component)
   return (
     <Route
       {...rest}

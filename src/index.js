@@ -8,11 +8,9 @@ import App from './pages/App'
 import theme from './config/themes'
 
 const GlobalStyle = createGlobalStyle`
-html, body {
-     height: 100%;
-}
 body {
   margin: 0;
+  width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
