@@ -1,14 +1,14 @@
 import React from 'react'
 
-import Header from './Header'
+import Navbar from './Navbar'
 import PropTypes from 'prop-types'
 
 const Layout = ({ children }) => {
   return (
     <>
       <div className='layout'>
-        <Header title='PexelsLike' />
         <main>{children}</main>
+        <Navbar />
       </div>
     </>
   )

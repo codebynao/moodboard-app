@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createGlobalStyle } from 'styled-components'
-import App from './pages/App'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import reportWebVitals from './reportWebVitals'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+
+import App from './pages/App'
+import theme from './config/themes'
 
 const GlobalStyle = createGlobalStyle`
 html, body {
@@ -21,8 +23,10 @@ body {
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
