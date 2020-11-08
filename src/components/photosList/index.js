@@ -21,8 +21,8 @@ const PhotosList = ({ list, fetchData }) => {
           </p>
         }
       >
-        {list.map(photo => (
-          <div key={photo.id}>
+        {list.map((photo, index) => (
+          <div key={index}>
             <PhotoCard photo={formatPhotoObj(photo)} />
           </div>
         ))}

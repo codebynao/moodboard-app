@@ -1,16 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { Home, Search, User } from 'react-feather'
+
+// Icons
+import { Home, User } from 'react-feather'
 
 const Navbar = () => {
   return (
     <StyledNavbar className='navbar'>
       <StyledLink to='/feed' exact>
         <Home />
-      </StyledLink>
-      <StyledLink to='/search' exact>
-        <Search />
       </StyledLink>
       <StyledLink to='/profile'>
         <User />

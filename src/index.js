@@ -8,6 +8,9 @@ import App from './pages/App'
 import theme from './config/themes'
 
 const GlobalStyle = createGlobalStyle`
+html, body, #root {
+  height: 100%;
+}
 body {
   margin: 0;
   width: 100%;

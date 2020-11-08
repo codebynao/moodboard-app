@@ -11,6 +11,7 @@ function App() {
 }
 
 const StyledApp = styled.div`
+  height: 100%;
   background-color: ${props => props.theme.lightGrey};
 `
 
