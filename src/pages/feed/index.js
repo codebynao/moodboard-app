@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+
+// API
+import { getPhotosFeed } from '../../api/photo'
 
 // Components
-import PhotoCard from '../../components/photoCard'
-
-// Utils
-import { formatPhotoObj } from '../../utils/photo'
+import PhotosList from '../../components/photosList'
 
 function Feed() {
+  const [currentPage, setCurrentPage] = useState(1)
   const [list, setList] = useState([])
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_BASE_URL}/curated`,
-      headers: {
-        Authorization: process.env.REACT_APP_API_KEY
+  const getList = () => {
+    getPhotosFeed(currentPage).then(photos => {
+      if (currentPage === 1) {
+        setList(photos)
+      } else {
+        setList(list.concat(photos))
       }
+      setCurrentPage(currentPage + 1)
     })
-      .then(result => {
-        setList(result.data.photos)
-      })
-      .catch(error => console.error(error))
+  }
+  useEffect(() => {
+    getList()
   }, [])
-  if (list && list.length) {
+
+  // Let's only save in the localStorage the 45 first photos (= 3 pages)
+  if (list && list.length < 50) {
     localStorage.setItem('photos', JSON.stringify(list))
   } else if (!list.length && localStorage.getItem('photos')) {
     setList(JSON.parse(localStorage.getItem('photos')))
@@ -30,11 +32,7 @@ function Feed() {
 
   return (
     <div className='feed'>
-      {list.map(photo => (
-        <div key={photo.id}>
-          <PhotoCard photo={formatPhotoObj(photo)} />
-        </div>
-      ))}
+      <PhotosList list={list} fetchData={getList} />
       <a href='https://www.pexels.com'>Photos provided by Pexels</a>
     </div>
   )
