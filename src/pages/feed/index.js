@@ -5,9 +5,7 @@ import { getPhotosFeed, searchPhotos } from '../../api/photo'
 
 // Components
 import PhotosList from '../../components/photosList'
-
-// Icons
-import { Search } from 'react-feather'
+import SearchForm from '../../components/searchForm'
 
 function Feed() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -46,8 +44,8 @@ function Feed() {
    * Updating the query also reset the current page number to avoid mixing
    * photos lists matching different queries
    */
-  const updateQuery = event => {
-    setQuery(event.target.value)
+  const updateQuery = value => {
+    setQuery(value)
     setCurrentPage(1)
   }
 
@@ -75,12 +73,11 @@ function Feed() {
 
   return (
     <div className='feed'>
-      <form>
-        <input type='text' value={query} onChange={updateQuery} />
-        <button type='submit' onClick={sendSearchRequest}>
-          <Search />
-        </button>
-      </form>
+      <SearchForm
+        query={query}
+        setQuery={updateQuery}
+        btnMethod={sendSearchRequest}
+      />
       <PhotosList list={list} fetchData={getList} />
       <a href='https://www.pexels.com'>Photos provided by Pexels</a>
     </div>

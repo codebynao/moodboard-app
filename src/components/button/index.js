@@ -3,16 +3,17 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Button = props => {
+  const content = props.children || props.text
   if (props.link) {
     return (
       <a href={props.link}>
-        <StyledButton type={props.buttonType}>{props.text}</StyledButton>
+        <StyledButton type={props.buttonType}>{content}</StyledButton>
       </a>
     )
   }
   return (
     <StyledButton type={props.buttonType} onClick={props.method}>
-      {props.text}
+      {content}
     </StyledButton>
   )
 }
@@ -22,7 +23,8 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  children: PropTypes.node,
   color: PropTypes.string,
   buttonType: PropTypes.string,
   link: PropTypes.string,
@@ -47,7 +49,6 @@ const StyledButton = styled.button`
   padding: 15px 25px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  background-color: blue;
 `
 
 export default Button
