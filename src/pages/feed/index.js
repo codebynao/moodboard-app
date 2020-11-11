@@ -79,7 +79,6 @@ function Feed() {
         btnMethod={sendSearchRequest}
       />
       <PhotosList list={list} fetchData={getList} />
-      <a href='https://www.pexels.com'>Photos provided by Pexels</a>
     </div>
   )
 }

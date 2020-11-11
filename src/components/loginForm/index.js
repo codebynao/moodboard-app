@@ -37,7 +37,7 @@ function LoginForm() {
 
   return (
     <div className='login'>
-      <h1>Sign in</h1>
+      <h1>Hello again!</h1>
       <Form onSubmit={handleSubmit}>
         <InputGroup>
           <Input
@@ -67,9 +67,19 @@ function LoginForm() {
 const InputGroup = styled.div`
   display: block;
   text-align: left;
+  padding-bottom: 30px;
 `
 const Form = styled.form`
   padding: 20px 10px;
+  input {
+    display: block;
+    width: 100%;
+    border-bottom: solid black 1px;
+    padding-top: 15px;
+  }
+  button {
+    border-radius: 5px;
+  }
 `
 
 export default LoginForm

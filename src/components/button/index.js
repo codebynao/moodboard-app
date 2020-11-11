@@ -45,10 +45,11 @@ const StyledButton = styled.button`
   -moz-box-shadow: none;
   box-shadow: none;
   border: none;
-  color: black;
+  color: white;
   padding: 15px 25px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  background-color: ${props => props.theme.primary};
 `
 
 export default Button
