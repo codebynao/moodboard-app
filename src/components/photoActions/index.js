@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { withTheme } from 'styled-components'
 
 // Components
@@ -12,11 +12,17 @@ import { handleFavorite, isFavorited } from '../../utils/photo'
 
 const PhotoActions = ({ photo, theme }) => {
   const [favoritedStatus, setFavoritedStatus] = useState(isFavorited(photo.id))
-  let filled = favoritedStatus ? theme.mediumGrey : 'none'
+  const [filled, setFilled] = useState('none')
+
   const handlePhotoFavorite = photo => {
     handleFavorite(photo)
     setFavoritedStatus(!favoritedStatus)
   }
+
+  useEffect(() => {
+    setFavoritedStatus(isFavorited(photo.id))
+    setFilled(favoritedStatus ? theme.mediumGrey : 'none')
+  })
 
   return (
     <Container>
