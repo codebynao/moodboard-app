@@ -16,13 +16,17 @@ function Feed() {
     // If no query, get the main feed
     if (!query.length) {
       getPhotosFeed(currentPage).then(photos => {
-        updateStateList(photos)
+        if (photos) {
+          updateStateList(photos)
+        }
       })
       return
     }
     // Otherwise, search photos matching the query
     searchPhotos(query, currentPage).then(photos => {
-      updateStateList(photos)
+      if (photos) {
+        updateStateList(photos)
+      }
     })
   }
 
@@ -65,11 +69,19 @@ function Feed() {
   }, [query])
 
   // Only save in the localStorage the 45 first photos of the main feed (= 3 pages)
-  if (list && list.length < 50 && !query.length) {
+  if (list && list.length > 0 && list.length < 50 && !query.length) {
+    console.log('set list', list)
     localStorage.setItem('photos', JSON.stringify(list))
   } else if (!list.length && localStorage.getItem('photos')) {
     setList(JSON.parse(localStorage.getItem('photos')))
   }
+
+  // If the user was offline and is back online but no data was displayed, fetch photos
+  window.addEventListener('online', () => {
+    if (!list || !list.length) {
+      getList()
+    }
+  })
 
   return (
     <div className='feed'>

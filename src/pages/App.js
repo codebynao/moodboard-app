@@ -1,18 +1,13 @@
 import React from 'react'
 import Router from '../config/router'
-import styled from 'styled-components'
 
 function App() {
   return (
-    <StyledApp className='App'>
+    <div className='App'>
+      <div className='alert-offline'>Oops.. Seems like you are offline...</div>
       <Router />
-    </StyledApp>
+    </div>
   )
 }
-
-const StyledApp = styled.div`
-  height: 100%;
-  background-color: ${props => props.theme.lightGrey};
-`
 
 export default App

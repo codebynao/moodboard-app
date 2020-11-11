@@ -20,6 +20,15 @@ const isLocalhost = Boolean(
     )
 )
 
+function handleNetworkChange() {
+  console.log('navigator.onLine', navigator.onLine)
+  if (navigator.onLine) {
+    document.body.classList.remove('offline')
+  } else {
+    document.body.classList.add('offline')
+  }
+}
+
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -33,6 +42,8 @@ export function register(config) {
 
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`
+
+      handleNetworkChange()
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
@@ -50,6 +61,9 @@ export function register(config) {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config)
       }
+
+      window.addEventListener('online', handleNetworkChange)
+      window.addEventListener('offline', handleNetworkChange)
     })
   }
 }

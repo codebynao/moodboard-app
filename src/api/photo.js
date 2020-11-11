@@ -15,11 +15,11 @@ export const getPhotosFeed = async (page = 1) => {
     }
   })
     .then(response => {
-      return (response.data && response.data.photos) || []
+      return (response.data && response.data.photos) || null
     })
     .catch(error => {
-      console.error(error)
-      return []
+      console.error('getPhotosFeed', error)
+      return null
     })
 }
 
@@ -38,10 +38,10 @@ export const searchPhotos = async (query, page = 1) => {
     }
   })
     .then(response => {
-      return (response.data && response.data.photos) || []
+      return (response.data && response.data.photos) || null
     })
     .catch(error => {
-      console.error(error)
-      return []
+      console.error('searchPhotos', error)
+      return null
     })
 }
