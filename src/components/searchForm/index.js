@@ -11,7 +11,7 @@ import { Search } from 'react-feather'
 
 const SearchForm = ({ query, setQuery, btnMethod }) => {
   return (
-    <StyledForm>
+    <StyledForm onSubmit={btnMethod}>
       <Input
         type='text'
         value={query}
@@ -19,7 +19,7 @@ const SearchForm = ({ query, setQuery, btnMethod }) => {
         inputId='search'
         placeholder='Search for photos...'
       />
-      <Button buttonType='submit' method={btnMethod}>
+      <Button buttonType='submit'>
         <Search />
       </Button>
     </StyledForm>

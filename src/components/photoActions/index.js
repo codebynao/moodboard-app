@@ -3,6 +3,7 @@ import styled, { withTheme } from 'styled-components'
 
 // Components
 import { Heart, PlusCircle } from 'react-feather'
+import MoodboardModal from '../moodboardModal'
 
 // Config
 import { photoType } from '../../config/propTypesSchemas'
@@ -13,10 +14,15 @@ import { handleFavorite, isFavorited } from '../../utils/photo'
 const PhotoActions = ({ photo, theme }) => {
   const [favoritedStatus, setFavoritedStatus] = useState(isFavorited(photo.id))
   const [filled, setFilled] = useState('none')
+  const [modalIsOpen, setIsOpen] = React.useState(false)
 
   const handlePhotoFavorite = photo => {
     handleFavorite(photo)
     setFavoritedStatus(!favoritedStatus)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
   }
 
   useEffect(() => {
@@ -25,8 +31,13 @@ const PhotoActions = ({ photo, theme }) => {
   })
 
   return (
-    <Container>
-      <PlusCircle />
+    <Container id={photo.id}>
+      <MoodboardModal
+        photo={photo}
+        isOpen={modalIsOpen}
+        closeModal={closeModal}
+      />
+      <PlusCircle onClick={() => setIsOpen(true)} />
       <Heart onClick={() => handlePhotoFavorite(photo)} fill={filled} />
     </Container>
   )

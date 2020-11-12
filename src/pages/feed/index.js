@@ -70,7 +70,6 @@ function Feed() {
 
   // Only save in the localStorage the 45 first photos of the main feed (= 3 pages)
   if (list && list.length > 0 && list.length < 50 && !query.length) {
-    console.log('set list', list)
     localStorage.setItem('photos', JSON.stringify(list))
   } else if (!list.length && localStorage.getItem('photos')) {
     setList(JSON.parse(localStorage.getItem('photos')))
