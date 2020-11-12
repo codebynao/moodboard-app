@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 
 // Assets
-import Logo from '../../assets/images/logo_moodboard.png'
+import Logo from '../../assets/images/logo-m-circle.png'
 
 // Component
 import LoginForm from '../../components/loginForm'
@@ -19,7 +19,7 @@ function Login() {
   return (
     <div>
       <StyledFormContainer>
-        <img src={Logo} alt='logo' width='110px' height='auto' />
+        <img src={Logo} alt='logo' width='170px' height='auto' />
         <LoginForm />
       </StyledFormContainer>
     </div>
@@ -27,7 +27,7 @@ function Login() {
 }
 
 const StyledFormContainer = styled.div`
-  max-height: 80vh;
+  max-height: 82vh;
   width: 80vw;
   margin: auto;
   text-align: center;
