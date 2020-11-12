@@ -11,7 +11,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        isUserAuthenticated() ? <Component {...props} /> : <Redirect to='/' />
+        isUserAuthenticated() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to='/login' />
+        )
       }
     />
   )
@@ -26,19 +30,33 @@ const Router = () => {
     <BrowserRouter>
       <Suspense fallback={<p>Coucou loading</p>}>
         <Switch>
+          <Route exact path='/'>
+            {isUserAuthenticated() ? (
+              <Redirect to='/feed' />
+            ) : (
+              <Redirect to='/login' />
+            )}
+          </Route>
           <Route
             exact
-            path='/'
+            path='/login'
             component={lazy(() => import('../pages/login'))}
           />
           <Layout>
-            <PrivateRoute
-              exact
-              path='/feed'
-              component={lazy(() => import('../pages/feed'))}
-            />
+            <Switch>
+              <PrivateRoute
+                exact
+                path='/feed'
+                component={lazy(() => import('../pages/feed'))}
+              />
+              <PrivateRoute
+                exact
+                path='/user'
+                component={lazy(() => import('../pages/user'))}
+              />
+              <Redirect to='/login' />
+            </Switch>
           </Layout>
-          <Redirect to='/' />
         </Switch>
       </Suspense>
     </BrowserRouter>

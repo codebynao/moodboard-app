@@ -11,7 +11,7 @@ const Navbar = () => {
       <StyledLink to='/feed' exact>
         <Home />
       </StyledLink>
-      <StyledLink to='/profile'>
+      <StyledLink to='/user'>
         <User />
       </StyledLink>
     </StyledNavbar>
