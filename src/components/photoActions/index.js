@@ -14,6 +14,7 @@ import { handleFavorite, isFavorited } from '../../utils/photo'
 const PhotoActions = ({ photo, theme }) => {
   const [favoritedStatus, setFavoritedStatus] = useState(isFavorited(photo.id))
   const [filled, setFilled] = useState('none')
+  const [border, setBorder] = useState(theme.mediumGrey)
   const [modalIsOpen, setIsOpen] = React.useState(false)
 
   const handlePhotoFavorite = photo => {
@@ -27,7 +28,8 @@ const PhotoActions = ({ photo, theme }) => {
 
   useEffect(() => {
     setFavoritedStatus(isFavorited(photo.id))
-    setFilled(favoritedStatus ? theme.mediumGrey : 'none')
+    setBorder(favoritedStatus ? theme.primary : theme.mediumGrey)
+    setFilled(favoritedStatus ? theme.primary : 'none')
   })
 
   return (
@@ -38,7 +40,11 @@ const PhotoActions = ({ photo, theme }) => {
         closeModal={closeModal}
       />
       <PlusCircle onClick={() => setIsOpen(true)} />
-      <Heart onClick={() => handlePhotoFavorite(photo)} fill={filled} />
+      <Heart
+        onClick={() => handlePhotoFavorite(photo)}
+        fill={filled}
+        color={border}
+      />
     </Container>
   )
 }
