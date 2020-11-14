@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import styled from 'styled-components'
 
 // Components
 import Button from '../../components/button'
@@ -19,10 +20,18 @@ const User = () => {
 
   return (
     <div>
-      <Button text='Logout' method={logout} />
+      <Header>
+        <Button text='Logout' method={logout} />
+      </Header>
       <UserPhotoTabs />
     </div>
   )
 }
+
+const Header = styled.div`
+  text-align: right;
+  padding: 5px 7px;
+  margin-bottom: 15px;
+`
 
 export default User
