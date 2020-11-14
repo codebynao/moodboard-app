@@ -4,27 +4,32 @@ import styled from 'styled-components'
 
 // components
 import MoodboardCard from '../moodboardCard'
+import MoodboardModalCard from '../moodboardModalCard'
 
-const MoodboardsList = ({ list }) => {
+// Config
+import { photoType } from '../../config/propTypesSchemas'
+
+const MoodboardsList = ({ list, isModal, photo }) => {
   if (!list.length) {
-    return (
-      <p>
-        You don&apos;t have any moodboards yet... Browse images to start
-        creating a moodboard
-      </p>
-    )
+    return <p>You don&apos;t have any moodboards yet...</p>
   }
+  const Card = isModal ? MoodboardModalCard : MoodboardCard
   return (
     <Container>
       {list.map((moodboard, index) => (
-        <MoodboardCard moodboard={moodboard} key={index} />
+        <Card moodboard={moodboard} key={index} photo={photo} />
       ))}
     </Container>
   )
 }
+MoodboardsList.defaultProps = {
+  isModal: false
+}
 
 MoodboardsList.propTypes = {
-  list: PropTypes.array.isRequired
+  list: PropTypes.array.isRequired,
+  isModal: PropTypes.bool,
+  ...photoType
 }
 
 const Container = styled.div`

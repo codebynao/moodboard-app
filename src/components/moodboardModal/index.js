@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 // Components
 import Modal from 'react-modal'
+import MoodboardForm from '../moodboardForm'
+import MoodboardsList from '../moodboardsList'
 import Photo from '../photo'
-import Select from '../select'
 
 // Config
 import { photoType } from '../../config/propTypesSchemas'
+
+// Utils
+import { createMoodBoard } from '../../utils/photo'
 
 const MoodboardModal = ({ photo, isOpen, closeModal }) => {
   Modal.setAppElement('body')
 
   const [moodboards, setMoodboards] = useState([])
-  const [selectOptions, setSelectOptions] = useState([])
+  const [newName, setNewName] = useState('')
 
   const customModalStyle = {
     content: {
@@ -24,6 +29,7 @@ const MoodboardModal = ({ photo, isOpen, closeModal }) => {
       border: 'none',
       padding: '10px 30px 30px',
       minHeight: '30vh',
+      maxHeight: '70vh',
       overflow: 'scroll'
     }
   }
@@ -31,47 +37,14 @@ const MoodboardModal = ({ photo, isOpen, closeModal }) => {
   useEffect(() => {
     if (localStorage.getItem('moodboards')) {
       const list = JSON.parse(localStorage.getItem('moodboards'))
-      setMoodboards(list)
-      setSelectOptions(
-        list.map(moodboard => formatSelectOption(moodboard.name))
-      )
+      setMoodboards(list.reverse())
     }
   }, [isOpen])
 
-  const formatSelectOption = option => {
-    return {
-      value: option,
-      label: option
-    }
-  }
-
-  const createMoodboard = name => {
-    const newMoodboard = {
-      name,
-      photos: [photo]
-    }
-    const newList = [...moodboards, newMoodboard]
-
-    setMoodboards(newList)
-    setSelectOptions(
-      newList.map(moodboard => formatSelectOption(moodboard.name))
-    )
-
-    localStorage.setItem('moodboards', JSON.stringify(newList))
-  }
-
-  const updateMoodboard = name => {
-    const moodboard = moodboards.find(item => item.name === name)
-    if (!moodboard) {
-      createMoodboard(name)
-      return
-    }
-
-    if (moodboard.photos.some(item => item.id === photo.id)) {
-      return
-    }
-    moodboard.photos.push(photo)
-    localStorage.setItem('moodboards', JSON.stringify(moodboards))
+  const addNewMoodBoard = () => {
+    const newList = createMoodBoard(photo, newName)
+    setMoodboards(newList.reverse())
+    setNewName('')
   }
 
   return (
@@ -81,9 +54,15 @@ const MoodboardModal = ({ photo, isOpen, closeModal }) => {
       style={customModalStyle}
       contentLabel='Add to moodboard'
     >
-      <p>Save to moodboard</p>
+      <h3>Save to moodboard</h3>
       <Photo src={photo.src} alt={photo.photographer} />
-      <Select options={selectOptions} update={updateMoodboard} />
+      <MoodboardForm
+        name={newName}
+        setName={setNewName}
+        method={addNewMoodBoard}
+      />
+      <ListTitle>Existing moodboards</ListTitle>
+      <MoodboardsList list={moodboards} isModal={true} photo={photo} />
     </Modal>
   )
 }
@@ -93,5 +72,10 @@ MoodboardModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired
 }
+
+const ListTitle = styled.p`
+  padding-top: 8px;
+  font-size: 15px;
+`
 
 export default MoodboardModal
