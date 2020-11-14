@@ -8,13 +8,13 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 // Utils
 import { formatPhotoObj } from '../../utils/photo'
 
-const PhotosList = ({ list, fetchData }) => {
+const PhotosList = ({ list, fetchData, hasMore }) => {
   return (
     <div>
       <InfiniteScroll
         dataLength={list.length}
         next={fetchData}
-        hasMore={true}
+        hasMore={hasMore}
         endMessage={
           <p style={{ textAlign: 'center' }}>
             <b>Yay! You have seen it all 🎉</b>
@@ -31,9 +31,21 @@ const PhotosList = ({ list, fetchData }) => {
   )
 }
 
+PhotosList.defaultProps = {
+  hasMore: true
+}
+
 PhotosList.propTypes = {
   list: PropTypes.array.isRequired,
-  fetchData: PropTypes.func.isRequired
+  hasMore: PropTypes.bool,
+  fetchData: function (props, propName) {
+    if (
+      props.hasMore &&
+      (props[propName] == undefined || typeof props[propName] != 'function')
+    ) {
+      return new Error('Please provide a method function!')
+    }
+  }
 }
 
 export default PhotosList

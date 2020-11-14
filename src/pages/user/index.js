@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 // Components
 import Button from '../../components/button'
+import UserPhotoTabs from '../../components/userPhotoTabs'
 
 const User = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false)
@@ -19,6 +20,7 @@ const User = () => {
   return (
     <div>
       <Button text='Logout' method={logout} />
+      <UserPhotoTabs />
     </div>
   )
 }

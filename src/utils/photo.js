@@ -23,7 +23,7 @@ function addToFavorites(photo, favorites) {
 export function formatPhotoObj(photo) {
   return {
     id: photo.id,
-    src: photo.src.medium,
+    src: photo.src.medium || photo.src,
     photographer: photo.photographer
   }
 }
