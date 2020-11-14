@@ -6,6 +6,9 @@ import styled from 'styled-components'
 import Button from '../../components/button'
 import Input from '../../components/input'
 
+// Utils
+import { getMoodboard } from '../../utils/photo'
+
 const MoodboardForm = ({ name, setName, method }) => {
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -15,6 +18,13 @@ const MoodboardForm = ({ name, setName, method }) => {
       setErrorMessage('A moodboard name cannot be empty')
       return
     }
+
+    const moodboard = getMoodboard(name.trim())
+    if (moodboard) {
+      setErrorMessage('A moodboard with the same name already exists')
+      return
+    }
+
     setErrorMessage('')
     method()
   }

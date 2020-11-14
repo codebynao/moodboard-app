@@ -101,8 +101,9 @@ export function getMoodboards() {
  * @returns {Object}
  */
 export function getMoodboard(moodboardName) {
+  const slug = toKebabCase(moodboardName)
   let moodboards = getMoodboards()
-  return moodboards.find(item => item.name === moodboardName)
+  return moodboards.find(item => item.slug === slug)
 }
 
 /**
@@ -131,7 +132,8 @@ export function isInMoodboard(photoId, moodboardName) {
  */
 export function handleMoodboardPhoto(photo, moodboardName) {
   const moodboards = getMoodboards()
-  let moodboard = moodboards.find(item => item.name === moodboardName)
+  const slug = toKebabCase(moodboardName)
+  let moodboard = moodboards.find(item => item.slug === slug)
   if (!moodboard) {
     return
   }
@@ -188,8 +190,10 @@ function removeFromMoodboard(id, moodboard) {
  * @returns {Array<Object>}
  */
 export function createMoodBoard(photo, moodboardName) {
+  console.log(moodboardName, toKebabCase(moodboardName.trim()))
   const newMoodboard = {
-    name: moodboardName,
+    name: moodboardName.trim(),
+    slug: toKebabCase(moodboardName.trim()),
     photos: [photo]
   }
 
@@ -198,4 +202,35 @@ export function createMoodBoard(photo, moodboardName) {
 
   localStorage.setItem('moodboards', JSON.stringify(newList))
   return newList
+}
+
+/**
+ * Convert a string to Kebab case
+ * @param {String} str
+ * @returns {String}
+ */
+function toKebabCase(str) {
+  return (
+    str &&
+    str
+      .match(
+        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+      )
+      .map(x => x.toLowerCase())
+      .join('-')
+  )
+}
+
+/**
+ * Remove moodboard from list of moodboards
+ * @param {String} slug
+ */
+export function removeMoodboard(slug) {
+  const moodboards = getMoodboards()
+  const idx = moodboards.findIndex(moodboard => moodboard.slug === slug)
+
+  if (idx > -1) {
+    moodboards.splice(idx, 1)
+  }
+  localStorage.setItem('moodboards', JSON.stringify(moodboards))
 }

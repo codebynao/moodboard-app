@@ -14,7 +14,7 @@ const UserPhotoTabs = () => {
 
   useEffect(() => {
     if (localStorage.getItem('favorites')) {
-      setFavorites(JSON.parse(localStorage.getItem('favorites')))
+      setFavorites(JSON.parse(localStorage.getItem('favorites')).reverse())
     }
     if (localStorage.getItem('moodboards')) {
       setMoodboards(JSON.parse(localStorage.getItem('moodboards')))

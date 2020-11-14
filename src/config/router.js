@@ -54,6 +54,11 @@ const Router = () => {
                 path='/user'
                 component={lazy(() => import('../pages/user'))}
               />
+              <PrivateRoute
+                exact
+                path='/user/moodboards/:slug'
+                component={lazy(() => import('../pages/moodboardDetails'))}
+              />
               <Redirect to='/login' />
             </Switch>
           </Layout>

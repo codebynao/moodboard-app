@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Redirect } from 'react-router-dom'
 
 // Images
 import NoImage from '../../assets/images/no-image-placeholder.jpg'
@@ -8,6 +9,7 @@ import NoImage from '../../assets/images/no-image-placeholder.jpg'
 const MoodboardCard = ({ moodboard }) => {
   const [mainCoverPhoto, setMainCoverPhoto] = useState({})
   const [coverPhotos, setCoverPhotos] = useState([])
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   useEffect(() => {
     if (moodboard.photos && moodboard.photos.length) {
@@ -18,10 +20,19 @@ const MoodboardCard = ({ moodboard }) => {
     }
     setMainCoverPhoto({ src: NoImage })
   }, [])
+
+  const goToDetails = () => {
+    setShouldRedirect(true)
+  }
+
+  if (shouldRedirect) {
+    return <Redirect to={`/user/moodboards/${moodboard.slug}`} />
+  }
+
   return (
     <Container>
       <Name>{moodboard.name}</Name>
-      <CoverImage>
+      <CoverImage onClick={goToDetails}>
         <img src={mainCoverPhoto.src} />
       </CoverImage>
       <CoverPreview>
