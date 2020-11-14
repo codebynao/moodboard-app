@@ -4,7 +4,9 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import { isUserAuthenticated } from '../utils/auth'
 
+// Components
 import Layout from '../components/layout/index'
+import Loader from '../components/loader'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
@@ -28,7 +30,7 @@ PrivateRoute.propTypes = {
 const Router = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<p>Coucou loading</p>}>
+      <Suspense fallback={<Loader />}>
         <Switch>
           <Route exact path='/'>
             {isUserAuthenticated() ? (
