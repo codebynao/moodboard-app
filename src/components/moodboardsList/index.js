@@ -6,9 +6,6 @@ import styled from 'styled-components'
 import MoodboardCard from '../moodboardCard'
 import MoodboardModalCard from '../moodboardModalCard'
 
-// Config
-import { photoType } from '../../config/propTypesSchemas'
-
 const MoodboardsList = ({ list, isModal, photo }) => {
   if (!list.length) {
     return <p>You don&apos;t have any moodboards yet...</p>
@@ -29,7 +26,11 @@ MoodboardsList.defaultProps = {
 MoodboardsList.propTypes = {
   list: PropTypes.array.isRequired,
   isModal: PropTypes.bool,
-  ...photoType
+  photo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    src: PropTypes.string.isRequired,
+    photographer: PropTypes.string.isRequired
+  })
 }
 
 const Container = styled.div`
