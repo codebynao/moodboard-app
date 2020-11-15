@@ -89,7 +89,11 @@ function Feed() {
         setQuery={updateQuery}
         btnMethod={sendSearchRequest}
       />
-      <PhotosList list={list} fetchData={getList} />
+      <PhotosList
+        list={list}
+        fetchData={getList}
+        endMessage='Yay! You have seen it all 🎉'
+      />
     </div>
   )
 }
