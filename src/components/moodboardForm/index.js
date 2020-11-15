@@ -7,7 +7,7 @@ import Button from '../../components/button'
 import Input from '../../components/input'
 
 // Utils
-import { getMoodboard } from '../../utils/photo'
+import { getMoodboard } from '../../utils/moodboards'
 
 const MoodboardForm = ({ name, setName, method }) => {
   const [errorMessage, setErrorMessage] = useState('')

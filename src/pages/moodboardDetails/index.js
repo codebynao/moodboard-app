@@ -9,7 +9,7 @@ import PhotosList from '../../components/photosList'
 import { ArrowLeft } from 'react-feather'
 
 // Utils
-import { getMoodboard, removeMoodboard } from '../../utils/photo'
+import { getMoodboard, removeMoodboard } from '../../utils/moodboards'
 
 const MoodboardDetails = props => {
   if (!props.match.params.slug) {
@@ -28,9 +28,9 @@ const MoodboardDetails = props => {
     }
 
     setMoodboard(moodboardFound)
-    console.log(moodboard)
+
     if (moodboardFound.photos) {
-      setPhotos(moodboardFound.photos)
+      setPhotos(moodboardFound.photos.reverse())
     } else {
       setPhotos([])
     }

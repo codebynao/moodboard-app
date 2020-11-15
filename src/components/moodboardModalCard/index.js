@@ -13,7 +13,7 @@ import {
   getMoodboard,
   handleMoodboardPhoto,
   isInMoodboard
-} from '../../utils/photo'
+} from '../../utils/moodboards'
 
 const MoodboardModalCard = ({ moodboard, photo }) => {
   const [coverPhoto, setCoverPhoto] = useState({})

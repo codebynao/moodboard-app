@@ -9,7 +9,7 @@ import MoodboardModal from '../moodboardModal'
 import { photoType } from '../../config/propTypesSchemas'
 
 // Utils
-import { handleFavorite, isFavorited } from '../../utils/photo'
+import { handleFavorite, isFavorited } from '../../utils/favorites'
 
 const PhotoActions = ({ photo, theme }) => {
   const [favoritedStatus, setFavoritedStatus] = useState(isFavorited(photo.id))

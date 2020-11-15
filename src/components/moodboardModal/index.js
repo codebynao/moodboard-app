@@ -12,7 +12,7 @@ import Photo from '../photo'
 import { photoType } from '../../config/propTypesSchemas'
 
 // Utils
-import { createMoodBoard } from '../../utils/photo'
+import { createMoodBoard } from '../../utils/moodboards'
 
 const MoodboardModal = ({ photo, isOpen, closeModal }) => {
   Modal.setAppElement('body')
