@@ -21,12 +21,12 @@ const Navbar = () => {
 const StyledLink = styled(NavLink)`
   text-decoration: none;
   flex: 1;
-  padding: 30px 0;
+  padding: 15px 0;
   color: ${props => props.theme.mediumGrey};
   svg {
     stroke-width: 1px;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
   &.active {
     color: ${props => props.theme.primary};
