@@ -6,6 +6,8 @@ Deployed on Netlify 🚀
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/737b986d-966f-434a-bbcd-74f06b651fb4/deploy-status)](https://moodboard.codebynao.tech)
 
+URL: https://moodboard.codebynao.tech
+
 > (don't forget to check this in a **mobile format** if you don't want to be shocked by the non-responsive design)
 
 I used the [Pexels API](https://www.pexels.com/api/) for the photos
